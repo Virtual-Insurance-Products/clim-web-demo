@@ -1,0 +1,26 @@
+#+TITLE: CLIM Web Demo
+
+* Introduction
+This repository demonstrates several of the features of
+~clim-web.asd~, which is a sort of CLIM like system for building web
+applications. It uses several of the concepts in CLIM (presentation
+types, presentation methods, command tables etc) to build flexible web
+applications. 
+
+This repository also contains some of the javascript resources
+required to make working applications with clim web. 
+
+It relies on 
+
+* Quickstart
+Put this directory in your ASDF search path somewhere change into that
+directory and...
+
+~ccl64 -e '(asdf:load-system :clim-web-demo)'~
+
+A web server will start on port 9980. Load the following URL:-
+http://localhost:9980/app/welcome
+
+* Next up
+I'm going to have to get this to do something at least moderately
+interesting. 
