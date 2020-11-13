@@ -10,7 +10,7 @@ applications.
 This repository also contains some of the javascript resources
 required to make working applications with clim web. 
 
-It relies on 
+It relies on many (most?) of the other VIP libraries found here.  
 
 * Quickstart
 Put this directory in your ASDF search path somewhere change into that
@@ -19,8 +19,52 @@ directory and...
 ~ccl64 -e '(asdf:load-system :clim-web-demo)'~
 
 A web server will start on port 9980. Load the following URL:-
-http://localhost:9980/app/welcome
+http://localhost:9980/app/todo-list
 
-* Next up
-I'm going to have to get this to do something at least moderately
-interesting. 
+This will present a simple TODO list application which loads the todos
+from file:todo.org. One thing to note is that in this 'web clim'
+framework, you can right click on anything which is /presented/ to
+bring up a context menu of commands applicable to that type of
+object. There is also a command defined with a drag and drop gesture,
+which means you can drag the items to rearrange.
+
+Hopefully it should be noticeable that there isn't really any 'wiring'
+code in file:todo.lisp which triggers actions from bits of the web
+page. All we do is define commands and then present things. 
+
+* Further Reading
+It is beyond the scope of this README to explain the principles of
+CLIM. Many useful pointers can be found on the [[https://common-lisp.net/project/mcclim/][McCLIM]] page. This
+web-clim project tries to generally follow the ideas of CLIM and to be
+somewhat compatible where it makes sense, but certainly isn't even
+close to a conforming implementation. In particular there is (as of
+yet) no concept of defining application panes, even though they would
+certainly make sense. 
+
+Another significant divergence is that /commands/ in web-clim have
+return values, which can be conveniently used to pop up overlays on a
+web page. This just seemed a convenient and handy way of making
+commands which display things. 
+
+Also, none of the CLIM drawing model is implemented here at
+all. Rather, I have systems for outputting HTML elements. The intent of
+this framework is to make application built with it feel (mostly) like
+normal web pages, which something which was a more /standard/
+implementation of CLIM would not (probably). 
+
+One /similarity/ with CLIM is that this web application /does/ have a
+Command Line Interface! Just press Control-[ on any web page (eg the
+TODO list) to show it. This is intentionally modelled on the Lisp
+Machine one. Try typing 'Listener' and hitting return!
+
+In the /app/todo-list application you can hit control-[ and then start
+typing 'New TODO' (just 'n' followed by space is enough) and it will
+complete the command. You can the enter a todo item in quotes (double
+or single) and it will be added to the list.
+
+This sort of thing isn't generally very useful for web apps -
+especially not for end users - but can be handy for testing, and it
+looks kind of cool. If you press return before providing all the
+parameters then a completion dialog will pop up asking for them. In
+our (VIPs) application we make great use of these, especially in the
+'back office' system. 

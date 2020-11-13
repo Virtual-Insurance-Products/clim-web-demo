@@ -6,4 +6,5 @@
   :depends-on ("clim-web")
   :components ((:file "package")
                (:file "web-server")
-               (:file "application")))
+               (:file "application")
+               (:file "todo")))

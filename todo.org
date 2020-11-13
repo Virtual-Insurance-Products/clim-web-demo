@@ -1,0 +1,7 @@
+- [X] Drag and drop to rearrange
+- [X] Save todo list as org file
+- [ ] Write some documentation about how this works
+- [ ] Show command for ticking items
+- [ ] Write some notes on this page
+- [ ] Make a way to add an item without bringin up the CLIM dialog
+- [ ] Make a save button
