@@ -107,9 +107,10 @@
                               :command-table *base-command-table*)
     ((item string))
   (let ((new (make-instance 'todo :description item)))
+    ;; delete it if it already exists in the list
     (com-delete-todo-item new)
-    (setf *todos* (append *todos*
-                          (list new)))
+    ;; then add it to the end
+    (setf *todos* (append *todos* (list new)))
     ;; since the return value is unimportant
     (values)))
 
