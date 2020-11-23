@@ -45,14 +45,15 @@
 (define-presentation-method present ((object todo) (type todo) (stream (eql :html))
                                      (view todo-editable-view) &key acceptably)
   (html
-    (:span :style (css :width "14px"
-                       :height "14px"
-                       :border-radius "12px"
-                       :display "inline-block"
-                       :margin "4px"
-                       :border "2px solid #555")
-           (when (done-p object)
-             (html (:noescape " &#x2713"))))
+    (:span :style (css :width "16px"
+                       :height "16px"
+                       :display "inline-block")
+           
+           (if (done-p object)
+               (html (:noescape " &#x2713"))
+               (html-present `(com-mark-as-done ,object)
+                             'command
+                             :view (make-instance 'url-view :link-text "O"))))
     (:print (description object))))
 
 
@@ -172,7 +173,7 @@
   (show-application
    (with-web-monad
      (mhtml
-       (:style "li {list-style-type: none;} * {font-family: Helvetica}")
+       (:style "li {list-style-type: none; padding:5px;} * {font-family: Helvetica}")
 
        (:h1 "TODO")
        
@@ -184,15 +185,28 @@
 
         ;; I'm going to use this partly so that I can drag items to the bottom
         (with-output-as-presentation (:html :end-of-list '(eql :end-of-list) :element-type :li)
-          (html (:i :style (css :margin "4px") "--- end of list ---"))))
+          (html
+            (:div :style (css :padding "5px")
+                  (:input :id "new-item" :value "")
+                  ;; the 'ex' JS function will invoke a CLIM command, which can be encoded thus:-
+                  (:button :onclick "ex(JSON.stringify(['New TODO',$e('new-item').value]))"
+                           "Add")))))
+
        
+       ;; the following presents an incomplete command and so will prompt for input :)
        (html-present (make-command 'com-new-todo)
                      'command
                      :view (make-instance 'url-view))
 
        (html-present (make-command 'com-save-todo-list)
                      'command
-                     :view (make-instance 'url-view))))))
+                     :view (make-instance 'url-view))
+       (:hr)
+       (:p (:b "Note: ")
+           "You can right click on the TODO items to activate any applicable commands in a context menu. You can also drag and drop them to rearrange. ")
+       (:p "Also, if you press control-[ then the command interactor will appear and you can type:-")
+       (:pre "New TODO \"A new item\"")
+       (:p "... and it will be added to the list. The interactor completes command names so you don't have to type the whole thing. ")))))
 
 
 
