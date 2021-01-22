@@ -46,6 +46,10 @@ cd fare-utils
 git checkout 2082b69ed9594e3b99f3a7a8775c3d19a2e31922
 cd ..
 
+# Now cd into the clim-web-demo directory before loading the system
+# because we need to be able to read the .org file where the todo
+# items are stored.
+cd clim-web-demo
 ccl64 -e '(asdf:load-system :clim-web-demo)'
 
 #+end_src
