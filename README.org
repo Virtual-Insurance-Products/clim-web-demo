@@ -13,13 +13,45 @@ required to make working applications with clim web.
 It relies on many (most?) of the other VIP libraries found here.  
 
 * Quickstart
-Put this directory in your ASDF search path somewhere change into that
-directory and...
+Install [[https://www.quicklisp.org/beta/][quicklisp]] and [[https://ccl.clozure.com][Clozure Common Lisp]] if you don't have them already. 
 
-~ccl64 -e '(asdf:load-system :clim-web-demo)'~
+#+begin_src sh
+cd ~/quicklisp/local-projects
+git clone https://github.com/Virtual-Insurance-Products/clim-web-demo
+git clone https://github.com/Virtual-Insurance-Products/clim-web
+git clone https://github.com/Virtual-Insurance-Products/vip-clim-core  
+git clone https://github.com/Virtual-Insurance-Products/anaphors
+git clone https://github.com/Virtual-Insurance-Products/cybertiggyr-time
+git clone https://github.com/Virtual-Insurance-Products/simple-parser
+git clone https://github.com/Virtual-Insurance-Products/vip-utils
+git clone https://github.com/Virtual-Insurance-Products/event-handlers
+git clone https://github.com/Virtual-Insurance-Products/Chapter31
+git clone https://github.com/Virtual-Insurance-Products/Chapter08
+git clone https://github.com/Virtual-Insurance-Products/http-response
+git clone https://github.com/Virtual-Insurance-Products/session
+git clone https://github.com/Virtual-Insurance-Products/web-utils
+git clone https://github.com/Virtual-Insurance-Products/web-transpiler
+# the following is just a snapshot from the (deprecated) fare matcher library
+git clone https://github.com/Virtual-Insurance-Products/fare-matcher-20111203-git.git
+git clone https://github.com/Virtual-Insurance-Products/web-monad
+git clone https://github.com/Virtual-Insurance-Products/monads
 
-A web server will start on port 9980. Load the following URL:-
-http://localhost:9980/app/todo-list
+git clone https://github.com/Virtual-Insurance-Products/parenscript
+cd parenscript
+git checkout 59217e4c2d54555d56dfec8e891557bfa35aa2b3 # These things are built with an old version of parenscript *FIXME
+cd ..
+
+git clone https://github.com/Virtual-Insurance-Products/fare-utils
+cd fare-utils
+git checkout 2082b69ed9594e3b99f3a7a8775c3d19a2e31922
+cd ..
+
+ccl64 -e '(asdf:load-system :clim-web-demo)'
+
+#+end_src
+
+A web server will start on port 9880. Load the following URL:-
+http://localhost:9880/app/todo-list
 
 This will present a simple TODO list application which loads the todos
 from file:todo.org. One thing to note is that in this 'web clim'

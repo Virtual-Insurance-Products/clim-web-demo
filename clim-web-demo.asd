@@ -7,4 +7,5 @@
   :components ((:file "package")
                (:file "web-server")
                (:file "application")
-               (:file "todo")))
+               (:file "todo")
+               (:file "load-data")))
